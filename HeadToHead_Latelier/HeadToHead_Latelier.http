@@ -1,0 +1,6 @@
+@HeadToHead_Latelier_HostAddress = http://localhost:5136
+
+GET {{HeadToHead_Latelier_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

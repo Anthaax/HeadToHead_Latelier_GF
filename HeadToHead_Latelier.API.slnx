@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="HeadToHead_Latelier.Common/HeadToHead_Latelier.Common.csproj" />
+  <Project Path="HeadToHead_Latelier.Reader/HeadToHead_Latelier.Reader.csproj" />
+  <Project Path="HeadToHead_Latelier.Tests/HeadToHead_Latelier.Tests.csproj" />
+  <Project Path="HeadToHead_Latelier/HeadToHead_Latelier.API.csproj" />
+</Solution>
