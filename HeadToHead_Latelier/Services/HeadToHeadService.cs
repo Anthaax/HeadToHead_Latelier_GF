@@ -24,5 +24,19 @@ namespace HeadToHead_Latelier.API.Services
         {
             return reader.GetPlayerById(id);
         }
+
+        /// <summary>
+        /// Gets general statistics about players.
+        /// </summary>
+        /// <returns>A GeneralStats object containing statistics.</returns>
+        public GeneralStats GetGeneralStats()
+        {
+            return new GeneralStats
+            {
+                CountryWithBestWinRatio = reader.GetCountryWithTheBestWinRatio(),
+                AverageIMC = reader.GetAverageIMC(),
+                MedianHeight = reader.GetMedianHeight()
+            };
+        }
     }
 }

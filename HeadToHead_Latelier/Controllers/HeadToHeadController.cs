@@ -57,5 +57,22 @@ namespace HeadToHead_Latelier.Controllers
             }
         }
 
+        [HttpGet("stats/general", Name = "GetGeneralStats")]
+        /// <summary>
+        /// Gets general statistics about players including the country with the best win ratio, average IMC, and median height.
+        /// </summary>
+        /// <returns>GeneralStats object containing statistics.</returns>
+        public ActionResult<GeneralStats> GetGeneralStats()
+        {
+            try
+            {
+                var stats = _headToHeadService.GetGeneralStats();
+                return Ok(stats);
+            }
+            catch (Exception e)
+            {
+                return ExceptionHandler.HandleException(e);
+            }
+        }
     }
 }

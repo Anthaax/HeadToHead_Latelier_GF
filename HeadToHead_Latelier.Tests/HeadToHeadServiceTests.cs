@@ -13,7 +13,6 @@ namespace HeadToHead_Latelier.Tests
         [SetUp]
         public void Setup()
         {
-            // Initialiser le conteneur IoC pour les tests
             var services = new ServiceCollection();
             services.AddScoped<IHeadToHeadService, HeadToHeadService>();
             services.AddScoped<IHeadToHeadReader, HeadToHeadReader>();
@@ -75,13 +74,58 @@ namespace HeadToHead_Latelier.Tests
         {
             // Arrange
             var service = _serviceProvider?.GetRequiredService<IHeadToHeadService>();
-            int invalidId = -999; // Un Id qui n'existe probablement pas
+            int invalidId = -999;
 
             // Act
             var player = service?.GetPlayerById(invalidId);
 
             // Assert
             Assert.That(player, Is.Null);
+        }
+
+        [Test]
+        public void GetGeneralStats_ShouldReturnNotNull()
+        {
+            // Arrange
+            var service = _serviceProvider?.GetRequiredService<IHeadToHeadService>();
+
+            // Act
+            var stats = service?.GetGeneralStats();
+
+            // Assert
+            Assert.That(stats, Is.Not.Null);
+        }
+
+        [Test]
+        public void GetGeneralStats_ShouldReturnValidData()
+        {
+            // Arrange
+            var service = _serviceProvider?.GetRequiredService<IHeadToHeadService>();
+
+            // Act
+            var stats = service?.GetGeneralStats();
+
+            // Assert
+            Assert.That(stats, Is.Not.Null);
+            Assert.That(stats?.CountryWithBestWinRatio, Is.Not.Null.And.Not.Empty);
+            Assert.That(stats?.AverageIMC, Is.GreaterThanOrEqualTo(0));
+            Assert.That(stats?.MedianHeight, Is.GreaterThanOrEqualTo(0));
+        }
+
+        [Test]
+        public void GetGeneralStats_ShouldReturnConsistentData()
+        {
+            // Arrange
+            var service = _serviceProvider?.GetRequiredService<IHeadToHeadService>();
+
+            // Act
+            var stats1 = service?.GetGeneralStats();
+            var stats2 = service?.GetGeneralStats();
+
+            // Assert
+            Assert.That(stats1?.CountryWithBestWinRatio, Is.EqualTo(stats2?.CountryWithBestWinRatio));
+            Assert.That(stats1?.AverageIMC, Is.EqualTo(stats2?.AverageIMC));
+            Assert.That(stats1?.MedianHeight, Is.EqualTo(stats2?.MedianHeight));
         }
     }
 }

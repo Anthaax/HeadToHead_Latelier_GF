@@ -6,5 +6,6 @@ namespace HeadToHead_Latelier.Common.Interfaces.Services
     {
         IEnumerable<Player> GetPlayers();
         Player? GetPlayerById(int id);
+        GeneralStats GetGeneralStats();
     }
 }

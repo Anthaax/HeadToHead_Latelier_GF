@@ -32,6 +32,60 @@ namespace HeadToHead_Latelier.Reader
             return players.FirstOrDefault(p => p.Id == id);
         }
 
+        public string GetCountryWithTheBestWinRatio()
+        {
+            var players = LoadPlayersFromJson();
+
+            return players
+                .Where(p => p.Data.Last.Length > 0 && p.Country.Code != null)
+                .GroupBy(p => p.Country.Code)
+                .Select(group => 
+                {
+                    var totalMatches = group.Sum(p => p.Data.Last.Length);
+                    var winCount = group.Sum(p => p.Data.Last.Count(result => result == 1));
+                    var winRatio = totalMatches > 0 ? (double)winCount / totalMatches : 0;
+                    return (group.Key, winRatio);
+                })
+                .OrderByDescending(x => x.winRatio)
+                .Select(x => x.Key)
+                .First();
+        }
+
+        public double GetAverageIMC()
+        {
+            var players = LoadPlayersFromJson();
+
+            var imcValues = players
+                .Where(p => p.Data.Height > 0)
+                .Select(p => (double)p.Data.Weight / (p.Data.Height * p.Data.Height))
+                .ToList();
+
+            return imcValues.Count > 0 ? imcValues.Average() : 0;
+        }
+
+        public double GetMedianHeight()
+        {
+            var players = LoadPlayersFromJson();
+
+            var heights = players
+                .Select(p => p.Data.Height)
+                .OrderBy(h => h)
+                .ToList();
+
+            if (heights.Count == 0)
+            {
+                return 0;
+            }
+
+            var count = heights.Count;
+            if (count % 2 == 1)
+            {
+                return heights[count / 2];
+            }
+
+            return (heights[count / 2 - 1] + heights[count / 2]) / 2.0;
+        }
+
         private IEnumerable<Player> LoadPlayersFromJson()
         {
             if (_cachedPlayers is not null)

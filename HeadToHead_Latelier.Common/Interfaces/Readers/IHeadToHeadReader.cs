@@ -6,5 +6,8 @@ namespace HeadToHead_Latelier.Common.Interfaces.Readers
     {
         IEnumerable<Player> GetPlayersByRank();
         Player? GetPlayerById(int id);
+        string GetCountryWithTheBestWinRatio();
+        double GetAverageIMC();
+        double GetMedianHeight();
     }
 }
