@@ -74,5 +74,24 @@ namespace HeadToHead_Latelier.Controllers
                 return ExceptionHandler.HandleException(e);
             }
         }
+
+        [HttpPut(Name = "InsertPlayer")]
+        /// <summary>
+        /// Inserts a new player.
+        /// </summary>
+        /// <param name="player">The player to insert.</param>
+        /// <returns>The inserted player.</returns>
+        public ActionResult<Player> InsertPlayer([FromBody] Player player)
+        {
+            try
+            {
+                var insertedPlayer = _headToHeadService.InsertPlayer(player);
+                return CreatedAtAction(nameof(GetPlayerById), new { id = insertedPlayer.Id }, insertedPlayer);
+            }
+            catch (Exception e)
+            {
+                return ExceptionHandler.HandleException(e);
+            }
+        }
     }
 }

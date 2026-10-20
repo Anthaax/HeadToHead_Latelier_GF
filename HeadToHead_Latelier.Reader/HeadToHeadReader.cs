@@ -4,7 +4,7 @@ using HeadToHead_Latelier.Common.Interfaces.Readers;
 
 namespace HeadToHead_Latelier.Reader
 {
-    public class HeadToHeadReader : IHeadToHeadReader
+    public class HeadToHeadReader : IHeadToHeadReader, ICacheManager
     {
         private const string JsonFilePath = "headtohead.json";
         private List<Player>? _cachedPlayers;
@@ -116,6 +116,12 @@ namespace HeadToHead_Latelier.Reader
                 .ToList();
 
             return _cachedPlayers;
+        }
+
+        public void ResetCache()
+        {
+            _cachedPlayers = null;
+            _cachedPlayersByRank = null;
         }
     }
 }

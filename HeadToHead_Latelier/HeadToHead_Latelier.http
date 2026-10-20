@@ -1,6 +1,45 @@
 @HeadToHead_Latelier_HostAddress = http://localhost:5136
 
-GET {{HeadToHead_Latelier_HostAddress}}/weatherforecast/
+### Récupérer la liste des joueurs triés par classement
+GET {{HeadToHead_Latelier_HostAddress}}/HeadToHead
 Accept: application/json
+
+###
+
+### Récupérer un joueur par son Id
+GET {{HeadToHead_Latelier_HostAddress}}/HeadToHead/17
+Accept: application/json
+
+###
+
+### Récupérer les statistiques générales
+GET {{HeadToHead_Latelier_HostAddress}}/HeadToHead/stats/general
+Accept: application/json
+
+###
+
+### Insérer un nouveau joueur
+PUT {{HeadToHead_Latelier_HostAddress}}/HeadToHead
+Content-Type: application/json
+
+{
+  "firstname": "Novak",
+  "lastname": "Tsitsipas",
+  "shortname": "N.TSI",
+  "sex": "M",
+  "country": {
+    "code": "SRB",
+    "picture": "https://tenisu.latelier.co/resources/Serbie.png"
+  },
+  "picture": "",
+  "data": {
+    "rank": 10,
+    "points": 2500,
+    "weight": 82000,
+    "height": 188,
+    "age": 28,
+    "last": [1, 0, 1, 1, 0]
+  }
+}
 
 ###

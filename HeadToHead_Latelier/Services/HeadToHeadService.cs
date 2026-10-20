@@ -1,10 +1,11 @@
 ﻿using HeadToHead_Latelier.Common.Data;
 using HeadToHead_Latelier.Common.Interfaces.Readers;
 using HeadToHead_Latelier.Common.Interfaces.Services;
+using HeadToHead_Latelier.Common.Interfaces.Writers;
 
 namespace HeadToHead_Latelier.API.Services
 {
-    public class HeadToHeadService(IHeadToHeadReader reader) : IHeadToHeadService
+    public class HeadToHeadService(IHeadToHeadReader reader, IHeadToHeadWriter writer) : IHeadToHeadService
     {
         /// <summary>
         /// Gets a list of players sorted by their results (Better players first).
@@ -37,6 +38,15 @@ namespace HeadToHead_Latelier.API.Services
                 AverageIMC = reader.GetAverageIMC(),
                 MedianHeight = reader.GetMedianHeight()
             };
+        }
+        /// <summary>
+        /// Inserts a new player into the system.
+        /// </summary>
+        /// <param name="player">The player to insert.</param>
+        /// <returns>The inserted player with its generated Id.</returns>
+        public Player InsertPlayer(Player player)
+        {
+            return writer.InsertPlayer(player);
         }
     }
 }
