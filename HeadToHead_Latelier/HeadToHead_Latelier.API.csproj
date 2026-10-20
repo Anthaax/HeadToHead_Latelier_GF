@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HeadToHead_Latelier.Common\HeadToHead_Latelier.Common.csproj" />
+    <ProjectReference Include="..\HeadToHead_Latelier.Reader\HeadToHead_Latelier.Reader.csproj" />
   </ItemGroup>
 
 </Project>

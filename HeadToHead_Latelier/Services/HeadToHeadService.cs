@@ -14,5 +14,15 @@ namespace HeadToHead_Latelier.API.Services
         {
             return reader.GetPlayersByRank();
         }
+
+        /// <summary>
+        /// Gets a player by their Id.
+        /// </summary>
+        /// <param name="id">The player's Id.</param>
+        /// <returns>The player or null if not found.</returns>
+        public Player? GetPlayerById(int id)
+        {
+            return reader.GetPlayerById(id);
+        }
     }
 }

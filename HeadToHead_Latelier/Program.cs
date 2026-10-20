@@ -1,5 +1,7 @@
 using HeadToHead_Latelier.Common.Interfaces.Services;
 using HeadToHead_Latelier.API.Services;
+using HeadToHead_Latelier.Common.Interfaces.Readers;
+using HeadToHead_Latelier.Reader;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,7 @@ builder.Services.AddOpenApi();
 
 // Enregistrer les services HeadToHead
 builder.Services.AddScoped<IHeadToHeadService, HeadToHeadService>();
+builder.Services.AddScoped<IHeadToHeadReader, HeadToHeadReader>();
 
 var app = builder.Build();
 

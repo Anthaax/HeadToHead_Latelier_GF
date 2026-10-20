@@ -34,22 +34,28 @@ namespace HeadToHead_Latelier.Controllers
             }
         }
 
-        [HttpGet("by-rank", Name = "GetPlayersByRank")]
+        [HttpGet("{id}", Name = "GetPlayerById")]
         /// <summary>
-        /// Gets a list of players sorted by their rank (Best rank first).
+        /// Gets a player by their Id.
         /// </summary>
-        /// <returns>A list of players sorted by rank.</returns>
-        public ActionResult<IEnumerable<Player>> GetPlayersByRank()
+        /// <param name="id">The player's Id.</param>
+        /// <returns>The player if found, otherwise a 404 Not Found response.</returns>
+        public ActionResult<Player> GetPlayerById(int id)
         {
             try
             {
-                var playersByRank = _headToHeadService.GetPlayers();
-                return Ok(playersByRank);
+                var player = _headToHeadService.GetPlayerById(id);
+                if (player == null)
+                {
+                    return NotFound();
+                }
+                return Ok(player);
             }
             catch (Exception e)
             {
                 return ExceptionHandler.HandleException(e);
             }
         }
+
     }
 }

@@ -26,6 +26,12 @@ namespace HeadToHead_Latelier.Reader
             return _cachedPlayersByRank;
         }
 
+        public Player? GetPlayerById(int id)
+        {
+            var players = LoadPlayersFromJson();
+            return players.FirstOrDefault(p => p.Id == id);
+        }
+
         private IEnumerable<Player> LoadPlayersFromJson()
         {
             if (_cachedPlayers is not null)

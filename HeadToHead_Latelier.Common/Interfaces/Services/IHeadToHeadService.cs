@@ -5,5 +5,6 @@ namespace HeadToHead_Latelier.Common.Interfaces.Services
     public interface IHeadToHeadService
     {
         IEnumerable<Player> GetPlayers();
+        Player? GetPlayerById(int id);
     }
 }

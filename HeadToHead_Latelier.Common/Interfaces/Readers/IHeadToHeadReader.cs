@@ -5,5 +5,6 @@ namespace HeadToHead_Latelier.Common.Interfaces.Readers
     public interface IHeadToHeadReader
     {
         IEnumerable<Player> GetPlayersByRank();
+        Player? GetPlayerById(int id);
     }
 }
